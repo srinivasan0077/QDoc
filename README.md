@@ -45,22 +45,3 @@ Doctors can manage their patient flow digitally, and patients can track their tu
 5. **Analytics for doctors** (patient flow, demographics).
 
 ---
-
-## 💰 Monetization
-- Clinic subscription (monthly SaaS).
-- Commission per appointment booking.
-- Priority booking fee for patients.
-- Ads & partnerships with pharmacies/labs.
-
----
-
-## 🛠️ Getting Started
-
-### Backend Setup
-```bash
-# Clone repository
-git clone https://github.com/yourusername/qdoc.git
-cd qdoc
-
-# Run backend
-./mvnw spring-boot:run
