@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.veprojects</groupId>
-	<artifactId>inboxiq</artifactId>
+	<artifactId>QDoc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>inboxiq</name>
+	<name>QDoc</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
