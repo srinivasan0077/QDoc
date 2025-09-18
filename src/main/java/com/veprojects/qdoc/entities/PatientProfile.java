@@ -1,10 +1,9 @@
 package com.veprojects.qdoc.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -15,7 +14,6 @@ import java.time.LocalDate;
 public class PatientProfile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate dateOfBirth;
@@ -23,8 +21,9 @@ public class PatientProfile {
     private String medicalHistory; // optional, free text
 
     @OneToOne
-    @JoinColumn(name = "user_id", unique = true)
-    private User user; // must have role = PATIENT
+    @MapsId
+    @JoinColumn(name = "id")
+    private User user;
 
     // Getters and setters...
 

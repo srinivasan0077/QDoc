@@ -4,20 +4,19 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-@Inheritance(strategy = InheritanceType.JOINED) // base for profiles
 public class User {
 
     @Id
@@ -26,29 +25,34 @@ public class User {
 
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String email;
 
-    private String passwordHash;
+    @Column(unique = true)
     private String phoneNumber;
+
+    private String passwordHash;
 
     @Enumerated(EnumType.STRING)
     private Role role; // PATIENT, DOCTOR, ATTENDANT, NURSE, ADMIN
 
-    private boolean otpEnabled = false;
-
     private boolean isLoginEnabled = false;
 
     private LocalDateTime createdAt;
+
     private LocalDateTime updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private DoctorProfile doctorProfile;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private PatientProfile patientProfile;
+
     // Getters and setters
-
-
     public Long getId() {
         return id;
     }
@@ -97,14 +101,6 @@ public class User {
         this.role = role;
     }
 
-    public boolean isOtpEnabled() {
-        return otpEnabled;
-    }
-
-    public void setOtpEnabled(boolean otpEnabled) {
-        this.otpEnabled = otpEnabled;
-    }
-
     public boolean isLoginEnabled() {
         return isLoginEnabled;
     }
@@ -135,6 +131,22 @@ public class User {
 
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
+    }
+
+    public DoctorProfile getDoctorProfile() {
+        return doctorProfile;
+    }
+
+    public void setDoctorProfile(DoctorProfile doctorProfile) {
+        this.doctorProfile = doctorProfile;
+    }
+
+    public PatientProfile getPatientProfile() {
+        return patientProfile;
+    }
+
+    public void setPatientProfile(PatientProfile patientProfile) {
+        this.patientProfile = patientProfile;
     }
 }
 

@@ -1,30 +1,31 @@
 package com.veprojects.qdoc.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "doctor_profiles")
-public class DoctorProfile {
+public class DoctorProfile{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String specialization;
-    private Double consultationFee;
-
     @OneToOne
-    @JoinColumn(name = "user_id", unique = true)
-    private User user; // must have role = DOCTOR
+    @MapsId
+    @JoinColumn(name = "id")
+    private User user;
+
+    private String specialization;
+
+    private Double consultationFee;
 
     // Optional: other doctor-specific fields
     private String experienceYears;
+
     private String qualifications;
 
     public Long getId() {
