@@ -1,5 +1,6 @@
 package com.veprojects.qdoc.security;
 
+import com.veprojects.qdoc.entities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +42,7 @@ public class SecurityConfiguration {
                 )
                 .authorizeHttpRequests((req)->
                         req.requestMatchers(WHITE_LIST_URL).permitAll()
+                                .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
                                 .anyRequest()
                                 .authenticated()
                         )

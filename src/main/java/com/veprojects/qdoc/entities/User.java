@@ -53,12 +53,6 @@ public class User {
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    private DoctorProfile doctorProfile;
-
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    private PatientProfile patientProfile;
-
     // Getters and setters
     public Long getId() {
         return id;
@@ -138,22 +132,6 @@ public class User {
 
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
-    }
-
-    public DoctorProfile getDoctorProfile() {
-        return doctorProfile;
-    }
-
-    public void setDoctorProfile(DoctorProfile doctorProfile) {
-        this.doctorProfile = doctorProfile;
-    }
-
-    public PatientProfile getPatientProfile() {
-        return patientProfile;
-    }
-
-    public void setPatientProfile(PatientProfile patientProfile) {
-        this.patientProfile = patientProfile;
     }
 
     public String getOtp() {
