@@ -36,7 +36,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role; // PATIENT, DOCTOR, ATTENDANT, NURSE, ADMIN
 
-    private boolean isLoginEnabled = false;
+    // OTP fields
+    private String otp;
+
+    private int otpAttempts;
+
+    private LocalDateTime otpExpiresAt;
+
+    private boolean isVerified = false;
 
     private LocalDateTime createdAt;
 
@@ -101,12 +108,12 @@ public class User {
         this.role = role;
     }
 
-    public boolean isLoginEnabled() {
-        return isLoginEnabled;
+    public boolean isVerified() {
+        return isVerified;
     }
 
-    public void setLoginEnabled(boolean loginEnabled) {
-        isLoginEnabled = loginEnabled;
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -147,6 +154,30 @@ public class User {
 
     public void setPatientProfile(PatientProfile patientProfile) {
         this.patientProfile = patientProfile;
+    }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    public int getOtpAttempts() {
+        return otpAttempts;
+    }
+
+    public void setOtpAttempts(int otpAttempts) {
+        this.otpAttempts = otpAttempts;
+    }
+
+    public LocalDateTime getOtpExpiresAt() {
+        return otpExpiresAt;
+    }
+
+    public void setOtpExpiresAt(LocalDateTime otpExpiresAt) {
+        this.otpExpiresAt = otpExpiresAt;
     }
 }
 

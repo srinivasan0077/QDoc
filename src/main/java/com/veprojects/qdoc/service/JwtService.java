@@ -12,7 +12,7 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private final String SECRET = "super-secret-key";
+    private final String SECRET = "super-secret-key-9090091012980282082028028308383048";
     private final long EXPIRATION = 15 * 60 * 1000;
 
     public String generateRefreshToken(User user){

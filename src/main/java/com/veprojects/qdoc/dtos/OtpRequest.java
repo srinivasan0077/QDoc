@@ -3,20 +3,27 @@ package com.veprojects.qdoc.dtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 
-public record AuthRequest(
+public record OtpRequest(
+
+
         @NotBlank(message = "Phone number cannot be blank")
         @Pattern(
-                regexp = "\\d{10}",
+             regexp = "\\d{10}",
+             message = "Phone number must be exactly 10 digits"
+         )
+         @NotNull
+         String phone,
+
+        @NotBlank(message = "Phone number cannot be blank")
+        @Pattern(
+                regexp = "\\d{6}",
                 message = "Phone number must be exactly 10 digits"
         )
         @NotNull
-        String phone,
+        String otp
 
-        @NotBlank(message = "Password cannot be blank")
-        @Size(min = 6,max = 100, message = "Password must be at least 6 characters long")
-        @NotNull
-        String password
 
-) {}
+){}
+
+
