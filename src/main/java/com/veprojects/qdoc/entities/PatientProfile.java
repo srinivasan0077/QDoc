@@ -1,5 +1,6 @@
 package com.veprojects.qdoc.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -16,8 +17,13 @@ public class PatientProfile {
     @Id
     private Long id;
 
+    @Column
     private LocalDate dateOfBirth;
+
+    @Column
     private String gender;
+
+    @Column
     private String medicalHistory; // optional, free text
 
     @OneToOne

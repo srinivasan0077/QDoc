@@ -1,8 +1,10 @@
 package com.veprojects.qdoc.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -19,13 +21,17 @@ public class DoctorProfile{
     @JoinColumn(name = "id")
     private User user;
 
-    private String specialization;
+    @ManyToOne
+    @JoinColumn(name = "specialization_id")
+    private Specialization specialization;
 
+    @Column
     private Double consultationFee;
 
-    // Optional: other doctor-specific fields
+    @Column
     private String experienceYears;
 
+    @Column
     private String qualifications;
 
     public Long getId() {
@@ -36,11 +42,11 @@ public class DoctorProfile{
         this.id = id;
     }
 
-    public String getSpecialization() {
+    public Specialization getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(Specialization specialization) {
         this.specialization = specialization;
     }
 

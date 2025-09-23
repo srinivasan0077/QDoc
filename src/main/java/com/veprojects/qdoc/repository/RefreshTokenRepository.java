@@ -14,5 +14,4 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken,Long>
 
     List<RefreshToken> findByUserId(Long userId);
 
-    long countByUser(User user);
 }

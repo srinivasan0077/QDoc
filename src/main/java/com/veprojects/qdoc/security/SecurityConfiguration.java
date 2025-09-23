@@ -42,7 +42,7 @@ public class SecurityConfiguration {
                 )
                 .authorizeHttpRequests((req)->
                         req.requestMatchers(WHITE_LIST_URL).permitAll()
-                                .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
+                                .requestMatchers("/admin/**").hasAnyRole(Role.ADMIN.name(),Role.DOCTOR.name())
                                 .anyRequest()
                                 .authenticated()
                         )

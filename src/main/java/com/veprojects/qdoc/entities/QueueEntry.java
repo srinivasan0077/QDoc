@@ -1,21 +1,29 @@
 package com.veprojects.qdoc.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "queue_entries")
+@Table(
+        name = "queue_entries",
+        uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"queue_id", "patient_id"})
+        }
+)
 public class QueueEntry {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
@@ -24,19 +32,15 @@ public class QueueEntry {
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    private PatientProfile patient; // link to PatientProfile
+    private PatientProfile patient;
 
-    @ManyToOne
-    @JoinColumn(name = "assigned_doctor_id")
-    private DoctorProfile assignedDoctor; // link to DoctorProfile, nullable until assigned
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.WAITING; // WAITING, CANCELLED, COMPLETED
 
-    private Integer position;
-    private String status;
-    private LocalDateTime createdAt;
+    private LocalDateTime joinedAt = LocalDateTime.now();
+
 
     // Getters and setters...
-
-
     public Long getId() {
         return id;
     }
@@ -61,35 +65,25 @@ public class QueueEntry {
         this.queue = queue;
     }
 
-    public DoctorProfile getAssignedDoctor() {
-        return assignedDoctor;
+    public LocalDateTime getJoinedAt() {
+        return joinedAt;
     }
 
-    public void setAssignedDoctor(DoctorProfile assignedDoctor) {
-        this.assignedDoctor = assignedDoctor;
+    public void setJoinedAt(LocalDateTime joinedAt) {
+        this.joinedAt = joinedAt;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public Integer getPosition() {
-        return position;
-    }
-
-    public void setPosition(Integer position) {
-        this.position = position;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public enum Status{
+        WAITING,
+        CANCELLED,
+        COMPLETED
     }
 }
